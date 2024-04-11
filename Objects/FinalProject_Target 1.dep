@@ -1,0 +1,41 @@
+Dependencies for Project 'FinalProject', Target 'Target 1': (DO NOT MODIFY !)
+CompilerVersion: 6160000::V6.16::ARMCLANG
+F (.\core_cm4_constants.s)(0x65CA9C16)(--target=arm-arm-none-eabi -mcpu=cortex-m4 -mfpu=fpv4-sp-d16 -mfloat-abi=hard -masm=auto -c-gdwarf-3 -Wa,armasm,--pd,"__EVAL SETA 1"-I./RTE/_Target_1-Ic:/Keil_v5/ARM/PACK/ARM/CMSIS/6.0.0/CMSIS/Core/Include-Ic:/Keil_v5/ARM/PACK/Keil/STM32L4xx_DFP/2.6.2/Drivers/CMSIS/Device/ST/STM32L4xx/Include-Wa,armasm,--pd,"__UVISION_VERSION SETA 535" -Wa,armasm,--pd,"_RTE_ SETA 1" -Wa,armasm,--pd,"STM32L476xx SETA 1" -Wa,armasm,--pd,"_RTE_ SETA 1"-o ./objects/core_cm4_constants.o)
+F (.\LCD.c)(0x65F22958)(-xc -std=c99 --target=arm-arm-none-eabi -mcpu=cortex-m4 -mfpu=fpv4-sp-d16 -mfloat-abi=hard -c-fno-rtti -funsigned-char -fshort-enums -fshort-wchar-D__EVAL -gdwarf-4 -O1 -ffunction-sections -Weverything -Wno-packed -Wno-reserved-id-macro -Wno-unused-macros -Wno-documentation-unknown-command -Wno-documentation -Wno-license-management -Wno-parentheses-equality -I./RTE/_Target_1-Ic:/Keil_v5/ARM/PACK/ARM/CMSIS/6.0.0/CMSIS/Core/Include-Ic:/Keil_v5/ARM/PACK/Keil/STM32L4xx_DFP/2.6.2/Drivers/CMSIS/Device/ST/STM32L4xx/Include-D__UVISION_VERSION="535" -D_RTE_ -DSTM32L476xx -D_RTE_-o ./objects/lcd.o -MD)
+I (lcd.h)(0x65F228C9)
+I (c:\Keil_v5\ARM\ARMCLANG\include\stdint.h)(0x6035B090)
+I (c:\Keil_v5\ARM\PACK\Keil\STM32L4xx_DFP\2.6.2\Drivers\CMSIS\Device\ST\STM32L4xx\Include\stm32l476xx.h)(0x60F02A28)
+I (c:\Keil_v5\ARM\PACK\ARM\CMSIS\6.0.0\CMSIS\Core\Include\core_cm4.h)(0x65809718)
+I (c:\Keil_v5\ARM\PACK\ARM\CMSIS\6.0.0\CMSIS\Core\Include\cmsis_version.h)(0x65809718)
+I (c:\Keil_v5\ARM\PACK\ARM\CMSIS\6.0.0\CMSIS\Core\Include\cmsis_compiler.h)(0x65809718)
+I (c:\Keil_v5\ARM\PACK\ARM\CMSIS\6.0.0\CMSIS\Core\Include\m-profile\cmsis_armclang_m.h)(0x65809718)
+I (c:\Keil_v5\ARM\ARMCLANG\include\arm_acle.h)(0x6035B084)
+I (c:\Keil_v5\ARM\PACK\ARM\CMSIS\6.0.0\CMSIS\Core\Include\m-profile\armv7m_mpu.h)(0x65809718)
+I (c:\Keil_v5\ARM\PACK\Keil\STM32L4xx_DFP\2.6.2\Drivers\CMSIS\Device\ST\STM32L4xx\Include\system_stm32l4xx.h)(0x60F02A28)
+F (.\LCD.h)(0x65F228C9)()
+F (.\startup_stm32l476xx.s)(0x65CA9C17)(--target=arm-arm-none-eabi -mcpu=cortex-m4 -mfpu=fpv4-sp-d16 -mfloat-abi=hard -masm=auto -c-gdwarf-3 -Wa,armasm,--pd,"__EVAL SETA 1"-I./RTE/_Target_1-Ic:/Keil_v5/ARM/PACK/ARM/CMSIS/6.0.0/CMSIS/Core/Include-Ic:/Keil_v5/ARM/PACK/Keil/STM32L4xx_DFP/2.6.2/Drivers/CMSIS/Device/ST/STM32L4xx/Include-Wa,armasm,--pd,"__UVISION_VERSION SETA 535" -Wa,armasm,--pd,"_RTE_ SETA 1" -Wa,armasm,--pd,"STM32L476xx SETA 1" -Wa,armasm,--pd,"_RTE_ SETA 1"-o ./objects/startup_stm32l476xx.o)
+F (.\stm32l476xx_constants.s)(0x65CA9C17)(--target=arm-arm-none-eabi -mcpu=cortex-m4 -mfpu=fpv4-sp-d16 -mfloat-abi=hard -masm=auto -c-gdwarf-3 -Wa,armasm,--pd,"__EVAL SETA 1"-I./RTE/_Target_1-Ic:/Keil_v5/ARM/PACK/ARM/CMSIS/6.0.0/CMSIS/Core/Include-Ic:/Keil_v5/ARM/PACK/Keil/STM32L4xx_DFP/2.6.2/Drivers/CMSIS/Device/ST/STM32L4xx/Include-Wa,armasm,--pd,"__UVISION_VERSION SETA 535" -Wa,armasm,--pd,"_RTE_ SETA 1" -Wa,armasm,--pd,"STM32L476xx SETA 1" -Wa,armasm,--pd,"_RTE_ SETA 1"-o ./objects/stm32l476xx_constants.o)
+F (.\SysTick.c)(0x6601FCAA)(-xc -std=c99 --target=arm-arm-none-eabi -mcpu=cortex-m4 -mfpu=fpv4-sp-d16 -mfloat-abi=hard -c-fno-rtti -funsigned-char -fshort-enums -fshort-wchar-D__EVAL -gdwarf-4 -O1 -ffunction-sections -Weverything -Wno-packed -Wno-reserved-id-macro -Wno-unused-macros -Wno-documentation-unknown-command -Wno-documentation -Wno-license-management -Wno-parentheses-equality -I./RTE/_Target_1-Ic:/Keil_v5/ARM/PACK/ARM/CMSIS/6.0.0/CMSIS/Core/Include-Ic:/Keil_v5/ARM/PACK/Keil/STM32L4xx_DFP/2.6.2/Drivers/CMSIS/Device/ST/STM32L4xx/Include-D__UVISION_VERSION="535" -D_RTE_ -DSTM32L476xx -D_RTE_-o ./objects/systick.o -MD)
+I (c:\Keil_v5\ARM\PACK\Keil\STM32L4xx_DFP\2.6.2\Drivers\CMSIS\Device\ST\STM32L4xx\Include\stm32l476xx.h)(0x60F02A28)
+I (c:\Keil_v5\ARM\PACK\ARM\CMSIS\6.0.0\CMSIS\Core\Include\core_cm4.h)(0x65809718)
+I (c:\Keil_v5\ARM\ARMCLANG\include\stdint.h)(0x6035B090)
+I (c:\Keil_v5\ARM\PACK\ARM\CMSIS\6.0.0\CMSIS\Core\Include\cmsis_version.h)(0x65809718)
+I (c:\Keil_v5\ARM\PACK\ARM\CMSIS\6.0.0\CMSIS\Core\Include\cmsis_compiler.h)(0x65809718)
+I (c:\Keil_v5\ARM\PACK\ARM\CMSIS\6.0.0\CMSIS\Core\Include\m-profile\cmsis_armclang_m.h)(0x65809718)
+I (c:\Keil_v5\ARM\ARMCLANG\include\arm_acle.h)(0x6035B084)
+I (c:\Keil_v5\ARM\PACK\ARM\CMSIS\6.0.0\CMSIS\Core\Include\m-profile\armv7m_mpu.h)(0x65809718)
+I (c:\Keil_v5\ARM\PACK\Keil\STM32L4xx_DFP\2.6.2\Drivers\CMSIS\Device\ST\STM32L4xx\Include\system_stm32l4xx.h)(0x60F02A28)
+F (.\SysTick.h)(0x66172E34)()
+F (.\main.c)(0x66172F96)(-xc -std=c99 --target=arm-arm-none-eabi -mcpu=cortex-m4 -mfpu=fpv4-sp-d16 -mfloat-abi=hard -c-fno-rtti -funsigned-char -fshort-enums -fshort-wchar-D__EVAL -gdwarf-4 -O1 -ffunction-sections -Weverything -Wno-packed -Wno-reserved-id-macro -Wno-unused-macros -Wno-documentation-unknown-command -Wno-documentation -Wno-license-management -Wno-parentheses-equality -I./RTE/_Target_1-Ic:/Keil_v5/ARM/PACK/ARM/CMSIS/6.0.0/CMSIS/Core/Include-Ic:/Keil_v5/ARM/PACK/Keil/STM32L4xx_DFP/2.6.2/Drivers/CMSIS/Device/ST/STM32L4xx/Include-D__UVISION_VERSION="535" -D_RTE_ -DSTM32L476xx -D_RTE_-o ./objects/main.o -MD)
+I (c:\Keil_v5\ARM\PACK\Keil\STM32L4xx_DFP\2.6.2\Drivers\CMSIS\Device\ST\STM32L4xx\Include\stm32l476xx.h)(0x60F02A28)
+I (c:\Keil_v5\ARM\PACK\ARM\CMSIS\6.0.0\CMSIS\Core\Include\core_cm4.h)(0x65809718)
+I (c:\Keil_v5\ARM\ARMCLANG\include\stdint.h)(0x6035B090)
+I (c:\Keil_v5\ARM\PACK\ARM\CMSIS\6.0.0\CMSIS\Core\Include\cmsis_version.h)(0x65809718)
+I (c:\Keil_v5\ARM\PACK\ARM\CMSIS\6.0.0\CMSIS\Core\Include\cmsis_compiler.h)(0x65809718)
+I (c:\Keil_v5\ARM\PACK\ARM\CMSIS\6.0.0\CMSIS\Core\Include\m-profile\cmsis_armclang_m.h)(0x65809718)
+I (c:\Keil_v5\ARM\ARMCLANG\include\arm_acle.h)(0x6035B084)
+I (c:\Keil_v5\ARM\PACK\ARM\CMSIS\6.0.0\CMSIS\Core\Include\m-profile\armv7m_mpu.h)(0x65809718)
+I (c:\Keil_v5\ARM\PACK\Keil\STM32L4xx_DFP\2.6.2\Drivers\CMSIS\Device\ST\STM32L4xx\Include\system_stm32l4xx.h)(0x60F02A28)
+I (SysTick.h)(0x66172E34)
+I (LCD.h)(0x65F228C9)
+I (c:\Keil_v5\ARM\ARMCLANG\include\stdlib.h)(0x6035B090)
