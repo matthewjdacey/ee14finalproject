@@ -3,7 +3,7 @@
  * Auto generated Run-Time-Environment Configuration File
  *      *** Do not modify ! ***
  *
- * Project: 'FinalProject' 
+ * Project: 'gyrotest' 
  * Target:  'Target 1' 
  */
 

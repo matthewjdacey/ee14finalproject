@@ -1,72 +1,69 @@
 #include "stm32l476xx.h"
 #include "SysTick.h"
-#include "LCD.h"
-#include <stdlib.h>
+#include "UART.h"
+#include "SysClock.h"
+#include "gyro.h"
 
-extern volatile int ms;
-void System_Clock_Init(void);
-void joystick_Init(void);
+#include <string.h>
+#include <stdio.h>
 
-void System_Clock_Init(){
-	
-	RCC->CR |= RCC_CR_MSION; 
-	
-	// Select MSI as the clock source of System Clock
-	RCC->CFGR &= ~RCC_CFGR_SW; 
-	
-	// Wait until MSI is ready
-	while ((RCC->CR & RCC_CR_MSIRDY) == 0); 	
-	
-	// MSIRANGE can be modified when MSI is OFF (MSION=0) or when MSI is ready (MSIRDY=1). 
-	RCC->CR &= ~RCC_CR_MSIRANGE; 
-	RCC->CR |= RCC_CR_MSIRANGE_7;  // Select MSI 8 MHz	
- 
-	// The MSIRGSEL bit in RCC-CR select which MSIRANGE is used. 
-	// If MSIRGSEL is 0, the MSIRANGE in RCC_CSR is used to select the MSI clock range.  (This is the default)
-	// If MSIRGSEL is 1, the MSIRANGE in RCC_CR is used. 
-	RCC->CR |= RCC_CR_MSIRGSEL; 
-	
-	// Enable MSI and wait until it's ready	
-	while ((RCC->CR & RCC_CR_MSIRDY) == 0); 		
+#define L3GD20_STATUS_REG_ADDR  0x27 // Status register
+#define L3GD20_OUT_X_L_ADDR			0x28 // Output register
+
+// char RxComByte = 0;
+// uint8_t buffer[BufferSize];
+// char str[] = "Give Red LED control input (Y = On, N = off):\r\n";
+// 
+// int main(void){
+// 	char rxByte;
+// 	
+// 	System_Clock_Init(); // Switch System Clock = 80 MHz
+// 	UART2_Init();
+// 		
+// 	printUART(str);
+// }
+
+int n;
+uint8_t buffer[BufferSize];
+
+int rightTurn(void) {
+	int turn = 0;
+	if(getZ() <= -500) {
+		printUART("rightTurn!");
+		turn = 1;
+	}
+	return turn;
 }
 
-void joystick_Init() {
-	// Turn on clock for GPIO port A
-	RCC->AHB2ENR |= RCC_AHB2ENR_GPIOAEN;
-	
-	// Set A0 to input mode
-	GPIOA->MODER &= ~0x3;
+int leftTurn(void) {
+	int turn = 0;
+	if(getZ() >= 500) {
+		printUART("leftTurn!");
+		turn = 1;
+	}
+	return turn;
 }
 
 int main(void){
-	//System Clock Initialization
+	float LRTest = 0;
+	float UDTest = 0;
+	float Z = 0;
+	float Y = 0;
+	const int CENTER_SENS = 2000;
+	const int PEDAL_SENS = 1500;
+	// System Clock Initialization
 	System_Clock_Init();
-	//LED Initialization
-	LCD_Initialization();
-	joystick_Init();
-	EXTI_Init();
+	// UART Driver Initialization
+	UART2_Init();
+												 
+	printUART("~~~~ Hello! ~~~~");
+	printUART("=== Pre-Gyro Initialization ====");
+	// Gyro Initialization
+	verboseInitializeGyro();
+	gyrodefault_tester();
+	printUART("~~~~ Goodbye! ~~~~");
 	
-	
-
-
-	//SysTick Initialization
-	//SysTick_Initialize(1000); // 1000 ticks
-	//delay of 1Sec
-	
-	
-	// while(1) {
-	// 	delay(1000); // 1000 calls of the handler
-	// 	//LED Toggle
-	// 	Red_LED_Toggle();
-	// }
-	
-	// ---- STOP WATCH ----
-	
-	SysTick_Initialize(10000); // SysTick reloads every 10ms
-	
-	while(1) {
-		LCD_Display_Timer(ms);
+ 	while (1) {
+		printXYZ();
 	}
-	
-
 }
