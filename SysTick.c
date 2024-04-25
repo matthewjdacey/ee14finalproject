@@ -1,9 +1,13 @@
 #include "stm32l476xx.h"
+#include "SysTick.h"
+#include "Interface.h"
 
-volatile uint32_t TimeDelay;
-
-volatile int ms; // number of ms passed
-volatile int joy_pressed = 0; // is joystick pressed UPDATEEEE
+volatile int ms; 								// number of ms passed
+volatile int joy_pressed = 1;
+volatile int minCount = 5999;
+volatile int min;
+volatile int configuring = 0; 
+volatile int pos;
 
 // ticks: number of ticks between two interrupts
 void SysTick_Initialize(uint32_t ticks) {
@@ -44,47 +48,36 @@ void SysTick_Handler(void) {
 	if(joy_pressed == 0) {
 		ms++;
 	}
-	TimeDelay--;
-}
-
-// nTime: specifies the delay time length
-void delay(uint32_t nTime) {
-	TimeDelay = nTime;
-	while(TimeDelay != 0);
-}
-
-void EXTI_Init(void) {
-	RCC->APB2ENR |= RCC_APB2ENR_SYSCFGEN;
 	
-	// Setup configuration register to GPIO Pin 0 of Port A (center joystick)
-	SYSCFG->EXTICR[0] &= ~SYSCFG_EXTICR1_EXTI0;
-	SYSCFG->EXTICR[0] |= SYSCFG_EXTICR1_EXTI0_PA;
-	
-	//Disabling rising edge trigger for EXTI 0 
-	EXTI->RTSR1 &= ~EXTI_RTSR1_RT0;
-	
-	//Enable falling edge
-	EXTI->FTSR1 |= EXTI_FTSR1_FT0;
-	
-	//Enable EXTI interrupt
-	EXTI->IMR1 |= EXTI_IMR1_IM0;
-	
-	NVIC_SetPriority(EXTI0_IRQn, 39);
-	
-	NVIC_EnableIRQ(EXTI0_IRQn);
-}
-
-void EXTI0_IRQHandler(void) {
-	//Clear pending status
-	NVIC_ClearPendingIRQ(EXTI0_IRQn);
-		
-	if(joy_pressed == 0) {
-		joy_pressed = 1;
-	} else {
-		joy_pressed = 0;
+	if (configuring == 1)
+		minCount = 5999;
+	else if (minCount == 0) {
+		min++;
+		minCount = 5999;
 	}
+	else
+		minCount--;
+}
+
+void clockInit(void){
 	
-	//Clear interrupt pending request
-	EXTI->PR1 |= EXTI_PR1_PIF0;
+	RCC->CR |= RCC_CR_MSION; 
 	
+	// Select MSI as the clock source of System Clock
+	RCC->CFGR &= ~RCC_CFGR_SW; 
+	
+	// Wait until MSI is ready
+	while ((RCC->CR & RCC_CR_MSIRDY) == 0); 	
+	
+	// MSIRANGE can be modified when MSI is OFF (MSION=0) or when MSI is ready (MSIRDY=1). 
+	RCC->CR &= ~RCC_CR_MSIRANGE; 
+	RCC->CR |= RCC_CR_MSIRANGE_7;  // Select MSI 8 MHz	
+ 
+	// The MSIRGSEL bit in RCC-CR select which MSIRANGE is used. 
+	// If MSIRGSEL is 0, the MSIRANGE in RCC_CSR is used to select the MSI clock range.  (This is the default)
+	// If MSIRGSEL is 1, the MSIRANGE in RCC_CR is used. 
+	RCC->CR |= RCC_CR_MSIRGSEL; 
+	
+	// Enable MSI and wait until it's ready	
+	while ((RCC->CR & RCC_CR_MSIRDY) == 0); 		
 }

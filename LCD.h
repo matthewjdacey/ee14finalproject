@@ -1,0 +1,24 @@
+#ifndef __STM32L476G_DISCOVERY_LCD_H
+#define __STM32L476G_DISCOVERY_LCD_H
+
+#include <stdint.h>
+#include "SysTick.h"
+
+#define bool _Bool
+
+void LCD_Initialization(void);
+void LCD_bar(void);
+void LCD_Clock_Init(void);
+void LCD_PIN_Init(void);
+void LCD_Configure(void);
+void LCD_Clear(void);
+void LCD_DisplayString(uint8_t* ptr);
+void LCD_WriteChar(uint8_t* ch, bool point, bool colon, uint8_t position);
+// static void LCD_Conv_Char_Seg(uint8_t* c,bool point,bool colon, uint8_t* digit);
+void LCD_Display_Timer(int ms);
+void LCD_Display_Steps(int steps);
+void LCD_Display_TOD(int mins); 
+void timeUp(void);
+void timeDown(void);
+
+#endif /* __STM32L476G_DISCOVERY_LCD_H */

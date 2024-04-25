@@ -6,6 +6,10 @@
 
 #define SENSITIVITY 2;
 
+static char lookingForNeg = 0;
+static float prevZ = 0;
+volatile int steps;
+
 /* 	SPI Info:
  *	================================================
  *	PD.1 = SPI2_SCK = Gyro MEMS_SCK					// Clock
@@ -417,5 +421,23 @@ void gyrodefault_tester(void) {
 			readGyroRegister(addresses[i], &rBuffer);
 			n = sprintf((char *)buffer, "address: 0x%.2X, value: 0x%.2X\r\n", addresses[i], rBuffer);
 			USART_Write(USART2, buffer, n);
+	}
+}
+
+void countSteps(void) {
+	float currZ = getZ();
+	
+	if(lookingForNeg) {
+		if(currZ <= -50) {
+			lookingForNeg = 0;
+			steps++;
+			prevZ = currZ;
+		}
+	} else {
+		if(currZ >= 50) {
+			lookingForNeg = 1;
+			steps++;
+			prevZ = currZ;
+		}
 	}
 }

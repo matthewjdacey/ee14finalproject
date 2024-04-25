@@ -9,7 +9,7 @@ License Information: Tufts EECS, Tufts University, LIC=----
  
 Tool Versions:
 Toolchain:       MDK-Lite  Version: 5.35.0.2
-Toolchain Path:  C:\Keil_v5\ARM\ARMCLANG\Bin
+Toolchain Path:  c:\Keil_v5\ARM\ARMCLANG\Bin
 C Compiler:      ArmClang.exe V6.16
 Assembler:       Armasm.exe V6.16
 Linker/Locator:  ArmLink.exe V6.16
@@ -21,81 +21,271 @@ Target DLL:      STLink\ST-LINKIII-KEIL_SWO.dll V3.0.9.0
 Dialog DLL:      TCM.DLL V1.53.0.0
  
 <h2>Project:</h2>
-Z:\ee14\gyroaccel\gyrotest.uvprojx
-Project File Date:  04/21/2024
+Z:\ee14\Remy_gyro\ee14finalproject\gyrotest.uvprojx
+Project File Date:  04/24/2024
 
 <h2>Output:</h2>
-*** Using Compiler 'V6.16', folder: 'C:\Keil_v5\ARM\ARMCLANG\Bin'
+*** Using Compiler 'V6.16', folder: 'c:\Keil_v5\ARM\ARMCLANG\Bin'
 Build target 'Target 1'
-main.c(2): warning: In file included from...
-./SysTick.h(12): warning: no newline at end of file [-Wnewline-eof]
-#endif /* __STM32L476G_DISCOVERY_SYSTICK_H */
-                                             ^
-main.c(5): warning: In file included from...
-./gyro.h(23): warning: no newline at end of file [-Wnewline-eof]
+main.c(4): warning: In file included from...
+./gyro.h(27): warning: no newline at end of file [-Wnewline-eof]
 #endif /* __STM32L476G_DISCOVERY_GYRO_L3GD20_H */
                                                  ^
-main.c(29): warning: no previous prototype for function 'rightTurn' [-Wmissing-prototypes]
-int rightTurn(void) {
-    ^
-main.c(29): note: declare 'static' if the function is not intended to be used outside of this translation unit
-int rightTurn(void) {
-^
-static 
-main.c(38): warning: no previous prototype for function 'leftTurn' [-Wmissing-prototypes]
-int leftTurn(void) {
-    ^
-main.c(38): note: declare 'static' if the function is not intended to be used outside of this translation unit
-int leftTurn(void) {
-^
-static 
-main.c(69): warning: no newline at end of file [-Wnewline-eof]
-}
- ^
-main.c(52): warning: unused variable 'CENTER_SENS' [-Wunused-variable]
-        const int CENTER_SENS = 2000;
-                  ^
-main.c(49): warning: unused variable 'UDTest' [-Wunused-variable]
-        float UDTest = 0;
-              ^
-main.c(51): warning: unused variable 'Y' [-Wunused-variable]
-        float Y = 0;
-              ^
-main.c(48): warning: unused variable 'LRTest' [-Wunused-variable]
-        float LRTest = 0;
-              ^
-main.c(53): warning: unused variable 'PEDAL_SENS' [-Wunused-variable]
-        const int PEDAL_SENS = 1500;
-                  ^
-main.c(50): warning: unused variable 'Z' [-Wunused-variable]
-        float Z = 0;
-              ^
-main.c(26): warning: no previous extern declaration for non-static variable 'n' [-Wmissing-variable-declarations]
-int n;
-    ^
-main.c(26): note: declare 'static' if the variable is not intended to be used outside of this translation unit
-int n;
-^
-main.c(27): warning: no previous extern declaration for non-static variable 'buffer' [-Wmissing-variable-declarations]
-uint8_t buffer[BufferSize];
-        ^
-main.c(27): note: declare 'static' if the variable is not intended to be used outside of this translation unit
-uint8_t buffer[BufferSize];
-^
-13 warnings generated.
+1 warning generated.
 compiling main.c...
+Interface.c(1): warning: In file included from...
+./Interface.h(8): warning: In file included from...
+./gyro.h(27): warning: no newline at end of file [-Wnewline-eof]
+#endif /* __STM32L476G_DISCOVERY_GYRO_L3GD20_H */
+                                                 ^
+Interface.c(4): warning: no previous extern declaration for non-static variable 'screen_select' [-Wmissing-variable-declarations]
+volatile uint8_t screen_select = 0;
+                 ^
+Interface.c(4): note: declare 'static' if the variable is not intended to be used outside of this translation unit
+volatile uint8_t screen_select = 0;
+         ^
+Interface.c(11): warning: implicit conversion changes signedness: 'int' to 'unsigned int' [-Wsign-conversion]
+        GPIOA->MODER &= ~0xFF;                          // ports 0-3
+                     ~~ ^~~~~
+Interface.c(12): warning: implicit conversion changes signedness: 'int' to 'unsigned int' [-Wsign-conversion]
+        GPIOA->MODER &= ~(3 << 10);             // ports 5
+                     ~~ ^~~~~~~~~~
+Interface.c(15): warning: implicit conversion changes signedness: 'int' to 'unsigned int' [-Wsign-conversion]
+        GPIOA->PUPDR &= ~0xCFC;
+                     ~~ ^~~~~~
+5 warnings generated.
+compiling Interface.c...
+LCD.c(5): warning: no previous extern declaration for non-static variable 'mornAft' [-Wmissing-variable-declarations]
+char mornAft = 'A';
+     ^
+LCD.c(5): note: declare 'static' if the variable is not intended to be used outside of this translation unit
+char mornAft = 'A';
+^
+LCD.c(53): warning: no previous extern declaration for non-static variable 'CapLetterMap' [-Wmissing-variable-declarations]
+const uint16_t CapLetterMap[26] = {
+               ^
+LCD.c(53): note: declare 'static' if the variable is not intended to be used outside of this translation unit
+const uint16_t CapLetterMap[26] = {
+      ^
+LCD.c(63): warning: no previous extern declaration for non-static variable 'NumberMap' [-Wmissing-variable-declarations]
+const uint16_t NumberMap[10] = {
+               ^
+LCD.c(63): note: declare 'static' if the variable is not intended to be used outside of this translation unit
+const uint16_t NumberMap[10] = {
+      ^
+LCD.c(71): warning: no previous extern declaration for non-static variable 'BAR' [-Wmissing-variable-declarations]
+uint8_t BAR = 0;
+        ^
+LCD.c(71): note: declare 'static' if the variable is not intended to be used outside of this translation unit
+uint8_t BAR = 0;
+^
+LCD.c(163): warning: implicit conversion changes signedness: 'int' to 'unsigned int' [-Wsign-conversion]
+        GPIOB->AFR[0] &= ~(0x00FF00FF);
+                      ~~ ^~~~~~~~~~~~~
+LCD.c(169): warning: implicit conversion changes signedness: 'int' to 'unsigned int' [-Wsign-conversion]
+        GPIOC->MODER &= ~(0x0003FFC0);
+                     ~~ ^~~~~~~~~~~~~
+LCD.c(175): warning: implicit conversion changes signedness: 'int' to 'unsigned int' [-Wsign-conversion]
+        GPIOC->AFR[1] &= ~(0x0000000F);
+                      ~~ ^~~~~~~~~~~~~
+LCD.c(183): warning: implicit conversion changes signedness: 'int' to 'unsigned int' [-Wsign-conversion]
+        GPIOD->AFR[0] &= ~(0x00000000);
+                      ~~ ^~~~~~~~~~~~~
+LCD.c(222): warning: declaration shadows a variable in the global scope [-Wshadow]
+        int pos = 0;
+            ^
+./SysTick.h(10): note: previous declaration is here
+extern volatile int pos;
+                    ^
+LCD.c(225): warning: implicit conversion loses integer precision: 'int' to 'uint8_t' (aka 'unsigned char') [-Wimplicit-int-conversion]
+                LCD_WriteChar(ptr, 0, 0, pos);
+                ~~~~~~~~~~~~~            ^~~
+LCD.c(232): warning: declaration shadows a variable in the global scope [-Wshadow]
+void LCD_Display_Timer(int ms){
+                           ^
+./SysTick.h(7): note: previous declaration is here
+extern volatile int ms;
+                    ^
+LCD.c(236): warning: implicit conversion changes signedness: 'int' to 'uint8_t' (aka 'unsigned char') [-Wsign-conversion]
+        uint8_t s5 = 48 + s % 10;                                                       //10ms place
+                ~~   ~~~^~~~~~~~
+LCD.c(237): warning: implicit conversion changes signedness: 'int' to 'uint8_t' (aka 'unsigned char') [-Wsign-conversion]
+        uint8_t s4 = 48 + ((s % 100) / 10);             // 100ms place
+                ~~   ~~~^~~~~~~~~~~~~~~~~~
+LCD.c(238): warning: implicit conversion changes signedness: 'int' to 'uint8_t' (aka 'unsigned char') [-Wsign-conversion]
+        uint8_t s3 = 48 + ((s % 1000) / 100);   // 1s place
+                ~~   ~~~^~~~~~~~~~~~~~~~~~~~
+LCD.c(239): warning: implicit conversion changes signedness: 'int' to 'uint8_t' (aka 'unsigned char') [-Wsign-conversion]
+        uint8_t s2 = 48 + ((s % 10000) / 1000); // 10s place
+                ~~   ~~~^~~~~~~~~~~~~~~~~~~~~~
+LCD.c(240): warning: implicit conversion changes signedness: 'int' to 'uint8_t' (aka 'unsigned char') [-Wsign-conversion]
+        uint8_t m1 = 48 + m % 10;                                                       //1min place
+                ~~   ~~~^~~~~~~~
+LCD.c(241): warning: implicit conversion changes signedness: 'int' to 'uint8_t' (aka 'unsigned char') [-Wsign-conversion]
+        uint8_t m0 = 48 + ((m % 100) / 10);             // 10min place
+                ~~   ~~~^~~~~~~~~~~~~~~~~~
+LCD.c(251): warning: implicit conversion changes signedness: 'int' to 'uint8_t' (aka 'unsigned char') [-Wsign-conversion]
+        uint8_t digit0 = 48 + steps % 10;
+                ~~~~~~   ~~~^~~~~~~~~~~~
+LCD.c(252): warning: implicit conversion changes signedness: 'int' to 'uint8_t' (aka 'unsigned char') [-Wsign-conversion]
+        uint8_t digit1 = 48 + steps % 100 / 10;
+                ~~~~~~   ~~~^~~~~~~~~~~~~~~~~~
+LCD.c(253): warning: implicit conversion changes signedness: 'int' to 'uint8_t' (aka 'unsigned char') [-Wsign-conversion]
+        uint8_t digit2 = 48 + steps % 1000 / 100;
+                ~~~~~~   ~~~^~~~~~~~~~~~~~~~~~~~
+LCD.c(254): warning: implicit conversion changes signedness: 'int' to 'uint8_t' (aka 'unsigned char') [-Wsign-conversion]
+        uint8_t digit3 = 48 + steps % 10000 / 1000;
+                ~~~~~~   ~~~^~~~~~~~~~~~~~~~~~~~~~
+LCD.c(255): warning: implicit conversion changes signedness: 'int' to 'uint8_t' (aka 'unsigned char') [-Wsign-conversion]
+        uint8_t digit4 = 48 + steps % 100000 / 10000;
+                ~~~~~~   ~~~^~~~~~~~~~~~~~~~~~~~~~~~
+LCD.c(256): warning: implicit conversion changes signedness: 'int' to 'uint8_t' (aka 'unsigned char') [-Wsign-conversion]
+        uint8_t digit5 = 48 + steps % 1000000 / 100000;
+                ~~~~~~   ~~~^~~~~~~~~~~~~~~~~~~~~~~~~~
+LCD.c(269): warning: implicit conversion changes signedness: 'int' to 'uint8_t' (aka 'unsigned char') [-Wsign-conversion]
+        uint8_t min0 = 48 + minutes % 10;       // 1 min place
+                ~~~~   ~~~^~~~~~~~~~~~~~
+LCD.c(270): warning: implicit conversion loses integer precision: 'int' to 'uint8_t' (aka 'unsigned char') [-Wimplicit-int-conversion]
+        uint8_t min1 = 48 + minutes / 10; // 10 min place
+                ~~~~   ~~~^~~~~~~~~~~~~~
+LCD.c(271): warning: implicit conversion changes signedness: 'int' to 'uint8_t' (aka 'unsigned char') [-Wsign-conversion]
+        uint8_t hr0 = 48 + hours % 10;                                                  // 1 hr place
+                ~~~   ~~~^~~~~~~~~~~~
+LCD.c(272): warning: implicit conversion loses integer precision: 'int' to 'uint8_t' (aka 'unsigned char') [-Wimplicit-int-conversion]
+        uint8_t hr1 = 48 + hours / 10;          // 10 hr place
+                ~~~   ~~~^~~~~~~~~~~~
+LCD.c(275): warning: passing 'char *' to parameter of type 'uint8_t *' (aka 'unsigned char *') converts between pointers to integer types where one is of the unique plain 'char' type and the other is not [-Wpointer-sign]
+        LCD_WriteChar(&m, 0, 0, 5);
+                      ^~
+./LCD.h(16): note: passing argument to parameter 'ch' here
+void LCD_WriteChar(uint8_t* ch, bool point, bool colon, uint8_t position);
+                            ^
+LCD.c(276): warning: passing 'char *' to parameter of type 'uint8_t *' (aka 'unsigned char *') converts between pointers to integer types where one is of the unique plain 'char' type and the other is not [-Wpointer-sign]
+        LCD_WriteChar(&mornAft, 0, 0, 4);
+                      ^~~~~~~~
+./LCD.h(16): note: passing argument to parameter 'ch' here
+void LCD_WriteChar(uint8_t* ch, bool point, bool colon, uint8_t position);
+                            ^
+LCD.c(393): warning: while loop has empty body [-Wempty-body]
+        while ((LCD->SR & LCD_SR_UDR) != 0); // Wait for Update Display Request Bit
+                                           ^
+LCD.c(393): note: put the semicolon on a separate line to silence this warning
+LCD.c(466): warning: illegal character encoding in character literal [-Winvalid-source-encoding]
+    case '<B5>' :
+         ^
+LCD.c(482): warning: illegal character encoding in character literal [-Winvalid-source-encoding]
+    case '<B0>' :
+         ^
+LCD.c(569): warning: implicit conversion changes signedness: 'int' to 'unsigned int' [-Wsign-conversion]
+      LCD->RAM[0] |= ((digit[0] & 0x1) << 4) | (((digit[0] & 0x2) >> 1) << 23) | (((digit[0] & 0x4) >> 2) << 22) | (((digit[0] & 0x8) >> 3) << 3);
+                  ~~ ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+LCD.c(571): warning: implicit conversion changes signedness: 'int' to 'unsigned int' [-Wsign-conversion]
+      LCD->RAM[2] |= ((digit[1] & 0x1) << 4) | (((digit[1] & 0x2) >> 1) << 23) | (((digit[1] & 0x4) >> 2) << 22) | (((digit[1] & 0x8) >> 3) << 3);
+                  ~~ ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+LCD.c(573): warning: implicit conversion changes signedness: 'int' to 'unsigned int' [-Wsign-conversion]
+      LCD->RAM[4] |= ((digit[2] & 0x1) << 4) | (((digit[2] & 0x2) >> 1) << 23) | (((digit[2] & 0x4) >> 2) << 22) | (((digit[2] & 0x8) >> 3) << 3);
+                  ~~ ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+LCD.c(575): warning: implicit conversion changes signedness: 'int' to 'unsigned int' [-Wsign-conversion]
+      LCD->RAM[6] |= ((digit[3] & 0x1) << 4) | (((digit[3] & 0x2) >> 1) << 23) | (((digit[3] & 0x4) >> 2) << 22) | (((digit[3] & 0x8) >> 3) << 3);
+                  ~~ ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+LCD.c(587): warning: implicit conversion changes signedness: 'int' to 'unsigned int' [-Wsign-conversion]
+      LCD->RAM[0] |= ((digit[0] & 0x1) << 6) | (((digit[0] & 0x2) >> 1) << 13) | (((digit[0] & 0x4) >> 2) << 12) | (((digit[0] & 0x8) >> 3) << 5);
+                  ~~ ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+LCD.c(589): warning: implicit conversion changes signedness: 'int' to 'unsigned int' [-Wsign-conversion]
+      LCD->RAM[2] |= ((digit[1] & 0x1) << 6) | (((digit[1] & 0x2) >> 1) << 13) | (((digit[1] & 0x4) >> 2) << 12) | (((digit[1] & 0x8) >> 3) << 5);
+                  ~~ ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+LCD.c(591): warning: implicit conversion changes signedness: 'int' to 'unsigned int' [-Wsign-conversion]
+      LCD->RAM[4] |= ((digit[2] & 0x1) << 6) | (((digit[2] & 0x2) >> 1) << 13) | (((digit[2] & 0x4) >> 2) << 12) | (((digit[2] & 0x8) >> 3) << 5);
+                  ~~ ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+LCD.c(593): warning: implicit conversion changes signedness: 'int' to 'unsigned int' [-Wsign-conversion]
+      LCD->RAM[6] |= ((digit[3] & 0x1) << 6) | (((digit[3] & 0x2) >> 1) << 13) | (((digit[3] & 0x4) >> 2) << 12) | (((digit[3] & 0x8) >> 3) << 5);
+                  ~~ ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+LCD.c(605): warning: implicit conversion changes signedness: 'int' to 'unsigned int' [-Wsign-conversion]
+      LCD->RAM[0] |= ((digit[0] & 0x1) << 15) | (((digit[0] & 0x2) >> 1) << 29) | (((digit[0] & 0x4) >> 2) << 28) | (((digit[0] & 0x8) >> 3) << 14);
+                  ~~ ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+LCD.c(607): warning: implicit conversion changes signedness: 'int' to 'unsigned int' [-Wsign-conversion]
+      LCD->RAM[2] |= ((digit[1] & 0x1) << 15) | (((digit[1] & 0x2) >> 1) << 29) | (((digit[1] & 0x4) >> 2) << 28) | (((digit[1] & 0x8) >> 3) << 14);
+                  ~~ ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+LCD.c(609): warning: implicit conversion changes signedness: 'int' to 'unsigned int' [-Wsign-conversion]
+      LCD->RAM[4] |= ((digit[2] & 0x1) << 15) | (((digit[2] & 0x2) >> 1) << 29) | (((digit[2] & 0x4) >> 2) << 28) | (((digit[2] & 0x8) >> 3) << 14);
+                  ~~ ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+LCD.c(611): warning: implicit conversion changes signedness: 'int' to 'unsigned int' [-Wsign-conversion]
+      LCD->RAM[6] |= ((digit[3] & 0x1) << 15) | (((digit[3] & 0x2) >> 1) << 29) | (((digit[3] & 0x4) >> 2) << 28) | (((digit[3] & 0x8) >> 3) << 14);
+                  ~~ ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+LCD.c(627): warning: implicit conversion changes signedness: 'int' to 'unsigned int' [-Wsign-conversion]
+      LCD->RAM[0] |= ((digit[0] & 0x1) << 31) | (((digit[0] & 0x8) >> 3) << 30);
+                  ~~ ~~~~~~~~~~~~~~~~~~~~~~~~~^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+LCD.c(628): warning: implicit conversion changes signedness: 'int' to 'unsigned int' [-Wsign-conversion]
+                        LCD->RAM[1] |= (((digit[0] & 0x2) >> 1) << 1) | (((digit[0] & 0x4) >> 2) << 0);
+                                    ~~ ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+LCD.c(630): warning: implicit conversion changes signedness: 'int' to 'unsigned int' [-Wsign-conversion]
+      LCD->RAM[2] |= ((digit[1] & 0x1) << 31) | (((digit[1] & 0x8) >> 3) << 30);
+                  ~~ ~~~~~~~~~~~~~~~~~~~~~~~~~^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+LCD.c(631): warning: implicit conversion changes signedness: 'int' to 'unsigned int' [-Wsign-conversion]
+                        LCD->RAM[3] |= (((digit[1] & 0x2) >> 1) << 1) | (((digit[1] & 0x4) >> 2) << 0);
+                                    ~~ ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+LCD.c(633): warning: implicit conversion changes signedness: 'int' to 'unsigned int' [-Wsign-conversion]
+      LCD->RAM[4] |= ((digit[2] & 0x1) << 31) | (((digit[2] & 0x8) >> 3) << 30);
+                  ~~ ~~~~~~~~~~~~~~~~~~~~~~~~~^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+LCD.c(634): warning: implicit conversion changes signedness: 'int' to 'unsigned int' [-Wsign-conversion]
+                        LCD->RAM[5] |= (((digit[2] & 0x2) >> 1) << 1) | (((digit[2] & 0x4) >> 2) << 0);
+                                    ~~ ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+LCD.c(636): warning: implicit conversion changes signedness: 'int' to 'unsigned int' [-Wsign-conversion]
+      LCD->RAM[6] |= ((digit[3] & 0x1) << 31) | (((digit[3] & 0x8) >> 3) << 30);
+                  ~~ ~~~~~~~~~~~~~~~~~~~~~~~~~^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+LCD.c(637): warning: implicit conversion changes signedness: 'int' to 'unsigned int' [-Wsign-conversion]
+                        LCD->RAM[7] |= (((digit[3] & 0x2) >> 1) << 1) | (((digit[3] & 0x4) >> 2) << 0);
+                                    ~~ ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+LCD.c(653): warning: implicit conversion changes signedness: 'int' to 'unsigned int' [-Wsign-conversion]
+      LCD->RAM[0] |= (((digit[0] & 0x2) >> 1) << 25) | (((digit[0] & 0x4) >> 2) << 24);
+                  ~~ ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+LCD.c(654): warning: implicit conversion changes signedness: 'int' to 'unsigned int' [-Wsign-conversion]
+                        LCD->RAM[1] |= ((digit[0] & 0x1) << 3) | (((digit[0] & 0x8) >> 3) << 2);
+                                    ~~ ~~~~~~~~~~~~~~~~~~~~~~~~^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+LCD.c(656): warning: implicit conversion changes signedness: 'int' to 'unsigned int' [-Wsign-conversion]
+      LCD->RAM[2] |= (((digit[1] & 0x2) >> 1) << 25) | (((digit[1] & 0x4) >> 2) << 24);
+                  ~~ ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+LCD.c(657): warning: implicit conversion changes signedness: 'int' to 'unsigned int' [-Wsign-conversion]
+                        LCD->RAM[3] |= ((digit[1] & 0x1) << 3) | (((digit[1] & 0x8) >> 3) << 2);
+                                    ~~ ~~~~~~~~~~~~~~~~~~~~~~~~^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+LCD.c(659): warning: implicit conversion changes signedness: 'int' to 'unsigned int' [-Wsign-conversion]
+      LCD->RAM[4] |= (((digit[2] & 0x2) >> 1) << 25) | (((digit[2] & 0x4) >> 2) << 24);
+                  ~~ ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+LCD.c(660): warning: implicit conversion changes signedness: 'int' to 'unsigned int' [-Wsign-conversion]
+                        LCD->RAM[5] |= ((digit[2] & 0x1) << 3) | (((digit[2] & 0x8) >> 3) << 2);
+                                    ~~ ~~~~~~~~~~~~~~~~~~~~~~~~^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+LCD.c(662): warning: implicit conversion changes signedness: 'int' to 'unsigned int' [-Wsign-conversion]
+      LCD->RAM[6] |= (((digit[3] & 0x2) >> 1) << 25) | (((digit[3] & 0x4) >> 2) << 24);
+                  ~~ ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+LCD.c(663): warning: implicit conversion changes signedness: 'int' to 'unsigned int' [-Wsign-conversion]
+                        LCD->RAM[7] |= ((digit[3] & 0x1) << 3) | (((digit[3] & 0x8) >> 3) << 2);
+                                    ~~ ~~~~~~~~~~~~~~~~~~~~~~~~^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+LCD.c(675): warning: implicit conversion changes signedness: 'int' to 'unsigned int' [-Wsign-conversion]
+      LCD->RAM[0] |= ((digit[0] & 0x1) << 17) | (((digit[0] & 0x2) >> 1) << 8) | (((digit[0] & 0x4) >> 2) << 9) | (((digit[0] & 0x8) >> 3) << 26);
+                  ~~ ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+LCD.c(677): warning: implicit conversion changes signedness: 'int' to 'unsigned int' [-Wsign-conversion]
+      LCD->RAM[2] |= ((digit[1] & 0x1) << 17) | (((digit[1] & 0x2) >> 1) << 8) | (((digit[1] & 0x4) >> 2) << 9) | (((digit[1] & 0x8) >> 3) << 26);
+                  ~~ ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+LCD.c(679): warning: implicit conversion changes signedness: 'int' to 'unsigned int' [-Wsign-conversion]
+      LCD->RAM[4] |= ((digit[2] & 0x1) << 17) | (((digit[2] & 0x2) >> 1) << 8) | (((digit[2] & 0x4) >> 2) << 9) | (((digit[2] & 0x8) >> 3) << 26);
+                  ~~ ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+LCD.c(681): warning: implicit conversion changes signedness: 'int' to 'unsigned int' [-Wsign-conversion]
+      LCD->RAM[6] |= ((digit[3] & 0x1) << 17) | (((digit[3] & 0x2) >> 1) << 8) | (((digit[3] & 0x4) >> 2) << 9) | (((digit[3] & 0x8) >> 3) << 26);
+                  ~~ ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+64 warnings generated.
+compiling LCD.c...
 linking...
-Program Size: Code=7866 RO-data=742 RW-data=0 ZI-data=1648  
+Program Size: Code=11242 RO-data=714 RW-data=12 ZI-data=1668  
 FromELF: creating hex file...
-".\Objects\gyrotest.axf" - 0 Error(s), 13 Warning(s).
+".\Objects\gyrotest.axf" - 0 Error(s), 70 Warning(s).
 
 <h2>Software Packages used:</h2>
 
 Package Vendor: ARM
-                http://www.keil.com/pack/ARM.CMSIS.5.8.0.pack
-                ARM.CMSIS.5.8.0
+                https://www.keil.com/pack/ARM.CMSIS.6.0.0.pack
+                ARM.CMSIS.6.0.0
                 CMSIS (Common Microcontroller Software Interface Standard)
-   * Component: CORE Version: 5.5.0
+   * Component: CORE Version: 6.0.0
 
 Package Vendor: Keil
                 https://www.keil.com/pack/Keil.STM32L4xx_DFP.2.7.0.pack
@@ -104,12 +294,12 @@ Package Vendor: Keil
 
 <h2>Collection of Component include folders:</h2>
   .\RTE\_Target_1
-  C:\Keil_v5\Packs\ARM\CMSIS\5.8.0\CMSIS\Core\Include
-  C:\Keil_v5\Packs\Keil\STM32L4xx_DFP\2.7.0\Drivers\CMSIS\Device\ST\STM32L4xx\Include
+  c:\Keil_v5\ARM\PACK\ARM\CMSIS\6.0.0\CMSIS\Core\Include
+  c:\Keil_v5\ARM\PACK\Keil\STM32L4xx_DFP\2.7.0\Drivers\CMSIS\Device\ST\STM32L4xx\Include
 
 <h2>Collection of Component Files used:</h2>
 
-   * Component: ARM::CMSIS:CORE:5.5.0
+   * Component: ARM::CMSIS:CORE:6.0.0
 Build Time Elapsed:  00:00:01
 </pre>
 </body>

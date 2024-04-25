@@ -384,26 +384,6 @@
           <GroupName>Source Group 1</GroupName>
           <Files>
             <File>
-              <FileName>StringUtilities.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>C:\Users\phenne04\Downloads\tmdarwen STM32 master STM32F411-OnboardGyroAccel\StringUtilities.c</FilePath>
-            </File>
-            <File>
-              <FileName>core_cm4_constants.s</FileName>
-              <FileType>2</FileType>
-              <FilePath>..\Lab2 GPIO\core_cm4_constants.s</FilePath>
-            </File>
-            <File>
-              <FileName>startup_stm32l476xx.s</FileName>
-              <FileType>2</FileType>
-              <FilePath>..\Lab2 GPIO\startup_stm32l476xx.s</FilePath>
-            </File>
-            <File>
-              <FileName>stm32l476xx_constants.s</FileName>
-              <FileType>2</FileType>
-              <FilePath>..\Lab2 GPIO\stm32l476xx_constants.s</FilePath>
-            </File>
-            <File>
               <FileName>main.c</FileName>
               <FileType>1</FileType>
               <FilePath>.\main.c</FilePath>
@@ -417,11 +397,6 @@
               <FileName>gyro.h</FileName>
               <FileType>5</FileType>
               <FilePath>.\gyro.h</FilePath>
-            </File>
-            <File>
-              <FileName>UART.h</FileName>
-              <FileType>5</FileType>
-              <FilePath>..\Lab2 UART\UART.h</FilePath>
             </File>
             <File>
               <FileName>SysTick.c</FileName>
@@ -447,6 +422,46 @@
               <FileName>SysClock.h</FileName>
               <FileType>5</FileType>
               <FilePath>.\SysClock.h</FilePath>
+            </File>
+            <File>
+              <FileName>UART.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\UART.h</FilePath>
+            </File>
+            <File>
+              <FileName>core_cm4_constants.s</FileName>
+              <FileType>2</FileType>
+              <FilePath>.\core_cm4_constants.s</FilePath>
+            </File>
+            <File>
+              <FileName>startup_stm32l476xx.s</FileName>
+              <FileType>2</FileType>
+              <FilePath>.\startup_stm32l476xx.s</FilePath>
+            </File>
+            <File>
+              <FileName>stm32l476xx_constants.s</FileName>
+              <FileType>2</FileType>
+              <FilePath>.\stm32l476xx_constants.s</FilePath>
+            </File>
+            <File>
+              <FileName>Interface.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\Interface.h</FilePath>
+            </File>
+            <File>
+              <FileName>Interface.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\Interface.c</FilePath>
+            </File>
+            <File>
+              <FileName>LCD.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\LCD.c</FilePath>
+            </File>
+            <File>
+              <FileName>LCD.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\LCD.h</FilePath>
             </File>
           </Files>
         </Group>

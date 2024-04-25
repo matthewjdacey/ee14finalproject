@@ -3,6 +3,8 @@
 
 #include "stm32l476xx.h"
 
+extern volatile int steps;
+
 void printUART(char* str);
 void initializeGyro(void);
 void verboseInitializeGyro(void);
@@ -19,5 +21,7 @@ void waitForRXEmpty(void);
 void writeGyroRegister(uint8_t addr, uint8_t tBuffer);
 void initializeSPI2(void);
 float scaler(int16_t axis_data, int level);
+
+void countSteps(void);
 
 #endif /* __STM32L476G_DISCOVERY_GYRO_L3GD20_H */
