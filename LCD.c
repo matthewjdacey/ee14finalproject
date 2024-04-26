@@ -3,6 +3,7 @@
 #include <stdint.h>
 
 char mornAft = 'A';
+volatile uint8_t AmPm_flag = 0;
 
 /*  =========================================================================
                                  LCD MAPPING
@@ -228,17 +229,21 @@ void LCD_DisplayString(uint8_t* ptr){
 	}
 }
 
-// displays a hard-coded name onto the screen
+// displays stopwatch time onto the screen given a count in 10s of milliseconds
 void LCD_Display_Timer(int ms){
-	int s = ms % 6000;
-	int m = ms / 6000;
+	int s = ms % 6000; // Get time in 10s of milliseconds after subtracting out minutes 
+	int m = ms / 6000; // Get how many minutes
 	
-	uint8_t s5 = 48 + s % 10; 							//10ms place
+	uint8_t s5 = 48 + s % 10; 							// 10ms place
 	uint8_t s4 = 48 + ((s % 100) / 10); 		// 100ms place
 	uint8_t s3 = 48 + ((s % 1000) / 100); 	// 1s place
 	uint8_t s2 = 48 + ((s % 10000) / 1000); // 10s place
-	uint8_t m1 = 48 + m % 10; 							//1min place
+	uint8_t m1 = 48 + m % 10; 							// 1min place
 	uint8_t m0 = 48 + ((m % 100) / 10); 		// 10min place
+	
+	// Drive each digit to the buffer
+	// Add semicolon between 1mins and 10s places
+	// Add period between 1s and 100ms places
 	LCD_WriteChar(&m0, 0, 0, 0);
 	LCD_WriteChar(&m1, 0, 1, 1);
 	LCD_WriteChar(&s2, 0, 0, 2);
@@ -248,12 +253,14 @@ void LCD_Display_Timer(int ms){
 }
 
 void LCD_Display_Steps(int steps) {
-	uint8_t digit0 = 48 + steps % 10;
-	uint8_t digit1 = 48 + steps % 100 / 10;
-	uint8_t digit2 = 48 + steps % 1000 / 100;
-	uint8_t digit3 = 48 + steps % 10000 / 1000;
-	uint8_t digit4 = 48 + steps % 100000 / 10000;
-	uint8_t digit5 = 48 + steps % 1000000 / 100000;
+	uint8_t digit0 = 48 + steps % 10; 							// 1s place
+	uint8_t digit1 = 48 + steps % 100 / 10; 				// 10s place
+	uint8_t digit2 = 48 + steps % 1000 / 100; 			// 100s place
+	uint8_t digit3 = 48 + steps % 10000 / 1000; 		// 1,000s place
+	uint8_t digit4 = 48 + steps % 100000 / 10000; 	// 10,000s place
+	uint8_t digit5 = 48 + steps % 1000000 / 100000; // 100,000s place
+	
+	// Drive all digits to buffer
 	LCD_WriteChar(&digit0, 0, 0, 5);
 	LCD_WriteChar(&digit1, 0, 0, 4);
 	LCD_WriteChar(&digit2, 0, 0, 3);
@@ -263,14 +270,32 @@ void LCD_Display_Steps(int steps) {
 }
 
 void LCD_Display_TOD(int mins) {
-	int minutes = mins % 60;
-	int hours = mins / 60;
+	if(mins >= 780) {
+		min -= 720;
+		mins -= 720;
+	}
+	int minutes = mins % 60; // Get total minutes after hours are subtracted out
+	int hours = mins / 60;   // Get total hours
 	
-	uint8_t min0 = 48 + minutes % 10; 	// 1 min place
+	uint8_t min0 = 48 + minutes % 10; // 1 min place
 	uint8_t min1 = 48 + minutes / 10; // 10 min place
-	uint8_t hr0 = 48 + hours % 10; 							// 1 hr place
+	uint8_t hr0 = 48 + hours % 10; 		// 1 hr place
 	uint8_t hr1 = 48 + hours / 10; 		// 10 hr place
-	char m = 'M';
+	
+	// 'A' / 'P' character is chosen 
+	if(mins == 721 && AmPm_flag) 
+		AmPm_flag = 0;
+	else if((mins == 720) && !AmPm_flag) {
+		if (mornAft == 'A')
+			mornAft = 'P';
+		else
+			mornAft = 'A';
+		
+		AmPm_flag = 1;
+	}
+	// Last character is always a 'M' (for AM or PM)
+	char m = 'M'; 
+	
 	
 	LCD_WriteChar(&m, 0, 0, 5);
 	LCD_WriteChar(&mornAft, 0, 0, 4);

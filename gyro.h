@@ -5,16 +5,12 @@
 
 extern volatile int steps;
 
-void printUART(char* str);
 void initializeGyro(void);
-void verboseInitializeGyro(void);
 int	 readGyroRegister(uint8_t addr, uint8_t *rBuffer);
 int16_t readGyroLowHigh(unsigned char registerLower, unsigned char registerHigher);
 float getX(void);
 float getY(void);
 float getZ(void);
-void printXYZ(void);
-void gyrodefault_tester(void);
 void waitForNotBSY(void);
 void waitForTXE(void);
 void waitForRXEmpty(void);

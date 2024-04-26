@@ -8,7 +8,6 @@
 
 
 static char lookingForNeg = 0;
-static float prevZ = 0;
 volatile int steps;
 
 // 4-24-24: Added additional comments. Found answers to a few of the questions.
@@ -40,14 +39,6 @@ volatile int steps;
  *	https://web.eece.maine.edu/~vweaver/classes/ece271_2022s/ece271_lab1.pdf
  *	Contains Schematic: https://www.st.com/resource/en/user_manual/um1879-discovery-kit-with-stm32l476vg-mcu-stmicroelectronics.pdf (CRITICAL: User manual SPECIFIC to our board)
  */
-
-void printUART(char *str)
-{
-	int n; // For testing w/UART print, only works with strings.
-	uint8_t buffer[BufferSize];
-	n = sprintf((char *)buffer, "%s\r\n", str);
-	USART_Write(USART2, buffer, n);
-}
 
 // Blocking loop, stays in loop until the BSY bit in SPI2's SR denotes empty.
 void waitForNotBSY(void)
@@ -335,75 +326,6 @@ void initializeGyro(void)
 		write_test = 1;
 	}
 }
-void verboseInitializeGyro(void)
-{
-	uint8_t rBuffer; // Receieve Buffer
-	uint8_t tBuffer; // Transmit Buffer
-	uint8_t placeholder;
-
-	printUART("Initializing Gyro!");
-
-	/* Enabling all GPIO pins used with the L3GD20 on the STM32L467VG-Discovery */
-
-	// As the gyro uses GPIO port D for all SPI pins, enable the clock for port D
-	RCC->AHB2ENR |= RCC_AHB2ENR_GPIODEN;
-
-	// GPIO Mode: Input(00), Output(01), AlterFunc(10), Analog(11, reset)
-	// See my .txt trying to figure out how this works for reference.
-	// So for GPIOD->MODER, set pins 1, 3, and 4 to alternate function (10)
-	GPIOD->MODER &= ~((3U) << (2 * 1)); // Set PD.1 to (10)
-	GPIOD->MODER |= (1U << (2 * 1 + 1));
-
-	GPIOD->MODER &= ~((3U) << (2 * 3)); // Set PD.3 to (10)
-	GPIOD->MODER |= (1U << (2 * 3 + 1));
-
-	GPIOD->MODER &= ~((3U) << (2 * 4)); // Set PD.4 to (10)
-	GPIOD->MODER |= (1U << (2 * 4 + 1));
-
-	//	n = sprintf((char *)buffer, "test=%x\r\n", GPIOD->MODER);
-	//	USART_Write(USART2, buffer, n);
-
-	GPIOD->MODER &= ~((3U) << (2 * 7)); // Set PD.7, chip select, to general purpose output mode (01)
-	GPIOD->MODER |= ((1U) << (2 * 7));
-
-	// Set the alternate function low registers (AFLR) for PD.1,3,4
-	// See pg.308 RM0351 for more info on AFLR.
-	GPIOD->AFR[0] |= (((5U) << (4 * 1)) | ((5U) << (4 * 3)) | ((5U) << (4 * 4)));
-
-	// Set pins to fast speed, see pg.304 RM0351 for more info on OSPEEDR
-	// For PD.1,3,4, and now 7 (chip select)
-	GPIOD->OSPEEDR |= (((2U) << (2 * 1)) | ((2U) << (2 * 3)) | ((2U) << (2 * 4)) | ((2U) << (2 * 7)));
-
-	// See pg.1476 in RM0351 for SPI2 Control Register (SPI2->CR) info
-	initializeSPI2();
-
-	// Set the CS high on the gyro, as setting it low indicates comms? See pg.25 L3GD20 and pg.307 in RM0351 for BSRR info
-	GPIOD->BSRR |= ((1U) << (2 * 3 + 1)); // Sets the corresponding ODx bit, at Chip Select
-
-	// Check WHO_AM_I register in the gyro to see if we get proper response of 0xD4
-	if (readGyroRegister(0x0F, &placeholder) != 0xD4)
-	{ // rBuffer is not as important as the value returned
-		printUART("Gyro WHO_AM_I Test Failed");
-	}
-	else
-	{
-		printUART("Gyro WHO_AM_I Test SUCCESSFUL!");
-	}
-
-	// pg.31 L3GD20, write 0x0F to register 0x20 will power up gyro, enabling X, Y, Z axis
-	tBuffer = 0x0F;
-	writeGyroRegister(0x20, tBuffer);
-
-	readGyroRegister(0x20, &rBuffer); // To check that we've correctly enabled the X, Y, Z axis
-	if (rBuffer != 0x0F)
-	{
-		printUART("Write to Gyro Failure!");
-	}
-	else
-	{
-		printUART("Initializing Gyro Success!");
-	}
-}
 
 // Reads the lower and higher register data for a gyro axis.
 int16_t readGyroLowHigh(unsigned char registerLower, unsigned char registerHigher)
@@ -445,51 +367,24 @@ float getZ(void)
 	return scaler(z, 0);
 }
 
-void printXYZ(void)
-{
-	int n;						// For UART
-	uint8_t buffer[BufferSize]; // For UART
-
-	float x = getX();
-	float y = getY();
-	float z = getZ();
-
-	n = sprintf((char *)buffer, "x=%f,\ty=%f,\tz=%f\r\n", x, y, z);
-	USART_Write(USART2, buffer, n);
-}
-
-// If this is ran after initialization, these values should be read:
-//		address: 0x20, value: 0x0F
-//		address: 0x0F, value: 0xD4
-void gyrodefault_tester(void)
-{
-	int i;
-	int n;						// For UART
-	uint8_t buffer[BufferSize]; // For UART
-	uint8_t addresses[8] = {0x20, 0x0F, 0x20, 0x0F, 0x20, 0x0F, 0x20, 0x0F};
-	uint8_t rBuffer = 0;
-	for (i = 0; i < 8; i++)
-	{
-		readGyroRegister(addresses[i], &rBuffer);
-		n = sprintf((char *)buffer, "address: 0x%.2X, value: 0x%.2X\r\n", addresses[i], rBuffer);
-		USART_Write(USART2, buffer, n);
-	}
-}
-
 void countSteps(void) {
-	float currZ = getZ();
+	float currZ = getZ(); // Get current Z gyro data
 	
 	if(lookingForNeg) {
+		// Check if accleration crosses theshold for a step
 		if(currZ <= -50) {
-			lookingForNeg = 0;
+			// Change boolean to say look for positive threshold
+			lookingForNeg = 0; 
+			// Increment step count
 			steps++;
-			prevZ = currZ;
 		}
 	} else {
+		// Check if accleration crosses theshold for a step
 		if(currZ >= 50) {
+			// Change boolean to say look for positive threshold
 			lookingForNeg = 1;
+			// Increment step count
 			steps++;
-			prevZ = currZ;
 		}
 	}
 }

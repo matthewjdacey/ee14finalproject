@@ -20,7 +20,7 @@ int main(void){
 	initializeGyro();
 	
  	while (1) {
-			drive_LCD();
+		drive_LCD();
 		countSteps();
 	}
 }

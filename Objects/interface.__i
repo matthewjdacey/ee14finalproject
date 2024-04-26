@@ -1,0 +1,8 @@
+-xc -std=c99 --target=arm-arm-none-eabi -mcpu=cortex-m4 -mfpu=fpv4-sp-d16 -mfloat-abi=hard -c
+-fno-rtti -funsigned-char -fshort-enums -fshort-wchar
+-D__EVAL -gdwarf-4 -O1 -ffunction-sections -Weverything -Wno-packed -Wno-reserved-id-macro -Wno-unused-macros -Wno-documentation-unknown-command -Wno-documentation -Wno-license-management -Wno-parentheses-equality 
+-I./RTE/_Target_1
+-Ic:/Keil_v5/ARM/PACK/ARM/CMSIS/6.0.0/CMSIS/Core/Include
+-Ic:/Keil_v5/ARM/PACK/Keil/STM32L4xx_DFP/2.7.0/Drivers/CMSIS/Device/ST/STM32L4xx/Include
+-D__UVISION_VERSION="535" -D_RTE_ -DSTM32L476xx -D_RTE_
+-o ./objects/interface.o -MD "Interface.c"
